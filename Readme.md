@@ -1,7 +1,7 @@
 
 # model
 
-  W.I.P minimalistic model component.
+  W.I.P minimalistic extensible model component.
 
 ## API
 
@@ -93,6 +93,20 @@ post.title()
 post.title('Ferrets')
 post.title()
 // => "Ferrets"
+```
+
+  - Emits "change" event with `(name, value, previousValue)`.
+  - Emits "change ATTR" event with `(value, previousValue)`.
+
+```js
+post.on('change', function(name, val, prev){
+  console.log('changed %s from %s to %s', name, prev, val)
+})
+
+post.on('change title', function(val, prev){
+  console.log('changed title')
+})
+
 ```
 
 ### #isNew()
