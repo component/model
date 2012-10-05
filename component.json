@@ -1,0 +1,21 @@
+{
+  "name": "model",
+  "repo": "component/model",
+  "description": "Data models",
+  "version": "0.0.1",
+  "keywords": ["model", "orm", "db", "database"],
+  "dependencies": {
+    "component/each": "*",
+    "component/json": "*",
+    "component/emitter": "*"
+  },
+  "development": {
+    "component/assert": "*",
+    "component/domify": "*"
+  },
+  "scripts": [
+    "index.js",
+    "static.js",
+    "proto.js"
+  ]
+}
