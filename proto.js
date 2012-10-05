@@ -81,13 +81,19 @@ exports.isValid = function(){
  * Return `false` or an object
  * containing the "dirty" attributes.
  *
+ * Optionally check for a specific `attr`.
+ *
+ * @param {String} [attr]
  * @return {Object|Boolean}
  * @api public
  */
 
-exports.changed = function(){
+exports.changed = function(attr){
   var dirty = this.dirty;
-  if (Object.keys(dirty).length) return dirty;
+  if (Object.keys(dirty).length) {
+    if (attr) return !! dirty[attr];
+    return dirty;
+  }
   return false;
 };
 
@@ -111,7 +117,7 @@ exports.validate = function(){
  *
  *  - `destroy` on deletion
  *
- * @param {Function} fn
+ * @param {Function} [fn]
  * @api public
  */
 
@@ -124,7 +130,7 @@ exports.destroy = function(fn){
     if (err) return fn(err);
     self.emit('destroy');
     self.destroyed = true;
-    fn();
+    fn && fn();
   });
 };
 
@@ -134,7 +140,6 @@ exports.destroy = function(fn){
  * Events:
  *
  *  - `save` on updates and saves
- *  - `update` on updates only
  *
  * @param {Function} fn
  * @api public
@@ -170,7 +175,7 @@ exports.update = function(fn){
   this.request('PUT', url, function(err){
     if (err) return fn(err);
     self.dirty = {};
-    self.emit('update');
+    self.emit('save');
     fn();
   });
 };
