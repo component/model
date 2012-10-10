@@ -7,7 +7,8 @@
   "dependencies": {
     "component/each": "*",
     "component/json": "*",
-    "component/emitter": "*"
+    "component/emitter": "*",
+    "visionmedia/superagent": "*"
   },
   "development": {
     "component/assert": "*",

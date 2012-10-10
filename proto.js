@@ -4,6 +4,7 @@
  */
 
 var Emitter = require('emitter')
+  , request = require('superagent')
   , JSON = require('json')
   , each = require('each')
   , noop = function(){};
@@ -126,11 +127,10 @@ exports.destroy = function(fn){
   var self = this;
   var url = this.url();
   fn = fn || noop;
-  this.request('DELETE', url, function(err, res){
-    if (err) return fn(err);
+  request.del(url, function(res){
     self.emit('destroy');
     self.destroyed = true;
-    fn && fn();
+    fn();
   });
 };
 
@@ -141,7 +141,7 @@ exports.destroy = function(fn){
  *
  *  - `save` on updates and saves
  *
- * @param {Function} fn
+ * @param {Function} [fn]
  * @api public
  */
 
@@ -151,8 +151,7 @@ exports.save = function(fn){
   var url = this.model.url();
   fn = fn || noop;
   if (!this.isValid()) return fn(new Error('validation failed'));
-  this.request('POST', url, function(err, res){
-    if (err) return fn(err);
+  request.post(url, self, function(res){
     if (res.body) self.primary(res.body.id);
     self.dirty = {};
     self.emit('save');
@@ -163,7 +162,7 @@ exports.save = function(fn){
 /**
  * Update and invoke `fn(err)`.
  *
- * @param {Function} fn
+ * @param {Function} [fn]
  * @api private
  */
 
@@ -172,8 +171,7 @@ exports.update = function(fn){
   var url = this.url();
   fn = fn || noop;
   if (!this.isValid()) return fn(new Error('validation failed'));
-  this.request('PUT', url, function(err){
-    if (err) return fn(err);
+  request.put(url, self, function(res){
     self.dirty = {};
     self.emit('save');
     fn();
@@ -200,39 +198,6 @@ exports.url = function(path){
   var id = this.primary();
   if (0 == arguments.length) return url + '/' + id;
   return url + '/' + id + '/' + path;
-};
-
-/**
- * Perform request `method` against `url` and invoke `fn(res)`.
- *
- * TODO: replace with superagent and add testssss
- *
- * @param {String} method
- * @param {String} url
- * @param {Function} fn
- * @api private
- */
-
-exports.request = function(method, url, fn){
-  var self = this;
-  var json = JSON.stringify(this);
-  var req = new XMLHttpRequest;
-  req.open(method, url, true);
-  req.setRequestHeader('Content-Type', 'application/json');
-  req.onreadystatechange = function(){
-    if (4 == req.readyState) {
-      var status = req.status / 100 | 0;
-      var type = (req.getResponseHeader('Content-Type') || '').split(';')[0];
-      var json = 'application/json' == type;
-      if (2 == status) {
-        if (json) req.body = JSON.parse(req.responseText);
-        fn(null, req);
-      } else {
-        
-      }
-    }
-  };
-  req.send(json);
 };
 
 /**

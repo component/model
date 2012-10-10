@@ -1,5 +1,11 @@
 
 /**
+ * Module dependencies.
+ */
+
+var request = require('superagent');
+
+/**
  * Construct a url to the given `path`.
  *
  * Example:
@@ -75,33 +81,19 @@ exports.attr = function(name, options){
   return this;
 };
 
-// TODO: replace all this junk with superagent and add tests
+/**
+ * Get `id` and invoke `fn(err, model)`.
+ *
+ * @param {Mixed} id
+ * @param {Function} fn
+ * @api public
+ */
 
 exports.get = function(id, fn){
   var self = this;
   var url = this.url(id);
-  request('GET', url, function(err, res){
-    if (err) return fn(err);
+  request.get(url, function(res){
     var model = new self(res.body);
     fn(null, model);
   });
 };
-
-function request(method, url, fn) {
-  var req = new XMLHttpRequest;
-  req.open(method, url, true);
-  req.onreadystatechange = function(){
-    if (4 == req.readyState) {
-      var status = req.status / 100 | 0;
-      var type = (req.getResponseHeader('Content-Type') || '').split(';')[0];
-      var json = 'application/json' == type;
-      if (2 == status) {
-        if (json) req.body = require('json').parse(req.responseText);
-        fn(null, req);
-      } else {
-        fn(new Error('got ' + req.status + ' response'));
-      }
-    }
-  };
-  req.send(null);
-}

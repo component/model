@@ -94,7 +94,9 @@
   var post = new Post({ title: 'Something', body: 'Some other thing here' });
 
   post.save(function(err){
-
+    Post.get(post.id(), function(err, post){
+      console.log(post);
+    })
   });
   
 </script>

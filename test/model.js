@@ -1,15 +1,32 @@
 
 var model = require('model')
-  , assert = require('component-assert');
+  , assert = require('component-assert')
+  , request = require('visionmedia-superagent');
 
 var User = model('User')
   .attr('id', { type: 'number' })
   .attr('name', { type: 'string' })
   .attr('age', { type: 'number' })
 
+function required(attr) {
+  return function(Model){
+    Model.validate(function(model){
+      if (!model.has(attr)) model.error(attr, 'field required');
+    });
+  }
+}
+
 var Pet = model('Pet')
+  .attr('id')
   .attr('name')
   .attr('species')
+  .use(required('name'));
+
+function reset(fn) {
+  request.del('/', function(res){
+    fn();
+  });
+}
 
 describe('model(name)', function(){
   it('should return a new model constructor', function(){
@@ -110,6 +127,124 @@ describe('Model#has(attr)', function(){
     var user = new User({ name: 'Tobi' });
     assert(true === user.has('name'));
     assert(false === user.has('age'));
+  })
+})
+
+describe('Model#destroy()', function(){
+  describe('when new', function(){
+    it('should error', function(done){
+      var pet = new Pet;
+      pet.destroy(function(err){
+        assert('not saved' == err.message);
+        done();
+      });
+    })
+  })
+
+  describe('when old', function(){
+    it('should DEL /:model/:id', function(done){
+      var pet = new Pet({ name: 'Tobi' });
+      pet.save(function(err){
+        assert(!err);
+        pet.destroy(function(err){
+          assert(!err);
+          assert(pet.destroyed);
+          done();
+        });
+      });
+    })
+
+    it('should emit "destroy"', function(done){
+      var pet = new Pet({ name: 'Tobi' });
+      pet.save(function(err){
+        assert(!err);
+        pet.on('destroy', done);
+        pet.destroy();
+      });
+    })
+  })
+})
+
+describe('Model#save(fn)', function(){
+  beforeEach(reset);
+
+  describe('when new', function(){
+    describe('and valid', function(){
+      it('should POST to /:model', function(done){
+        var pet = new Pet({ name: 'Tobi', species: 'Ferret' });
+        pet.save(function(){
+          assert(0 == pet.id());
+          done();
+        });
+      })
+
+      it('should emit "save"', function(done){
+        var pet = new Pet({ name: 'Tobi', species: 'Ferret' });
+        pet.on('save', done);
+        pet.save();
+      })
+    })
+
+    describe('and invalid', function(){
+      it('should error', function(done){
+        var pet = new Pet;
+        pet.save(function(err){
+          assert('validation failed' == err.message);
+          assert(1 == pet.errors.length);
+          assert('name' == pet.errors[0].attr);
+          assert('field required' == pet.errors[0].message);
+          assert(null == pet.id());
+          done();
+        });
+      })
+    })
+  })
+
+  describe('when old', function(){
+    describe('and valid', function(){
+      it('should PUT to /:model/:id', function(done){
+        var pet = new Pet({ name: 'Tobi', species: 'Ferret' });
+        pet.save(function(){
+          assert(0 == pet.id());
+          pet.name('Loki');
+          pet.save(function(){
+            assert(0 == pet.id());
+            Pet.get(0, function(err, pet){
+              assert(0 == pet.id());
+              assert('Loki' == pet.name());
+              done();
+            });
+          });
+        });
+      })
+
+      it('should emit "save"', function(done){
+        var pet = new Pet({ name: 'Tobi', species: 'Ferret' });
+        pet.save(function(err){
+          assert(!err);
+          pet.on('save', done);
+          pet.save();
+        });
+      })
+    })
+
+    describe('and invalid', function(){
+      it('should error', function(done){
+        var pet = new Pet({ name: 'Tobi' });
+        pet.save(function(err){
+          assert(!err);
+          pet.name(null);
+          pet.save(function(err){
+            assert('validation failed' == err.message);
+            assert(1 == pet.errors.length);
+            assert('name' == pet.errors[0].attr);
+            assert('field required' == pet.errors[0].message);
+            assert(0 == pet.id());
+            done();
+          });
+        });
+      })
+    })
   })
 })
 
