@@ -3,7 +3,12 @@
   "repo": "component/model",
   "description": "Data models",
   "version": "0.0.1",
-  "keywords": ["model", "orm", "db", "database"],
+  "keywords": [
+    "model",
+    "orm",
+    "db",
+    "database"
+  ],
   "dependencies": {
     "component/each": "*",
     "component/json": "*",
@@ -18,5 +23,6 @@
     "index.js",
     "static.js",
     "proto.js"
-  ]
+  ],
+  "license": "MIT"
 }
