@@ -94,7 +94,20 @@ exports.get = function(id, fn){
   var self = this;
   var url = this.url(id);
   request.get(url, function(res){
+    if (res.error) return fn(error(res));
     var model = new self(res.body);
     fn(null, model);
   });
 };
+
+/**
+ * Response error helper.
+ *
+ * @param {Response} er
+ * @return {Error}
+ * @api private
+ */
+
+function error(res) {
+  return new Error('got ' + res.status + ' response');
+}

@@ -112,7 +112,8 @@ exports.validate = function(){
 };
 
 /**
- * Destroy the model and mark it as `.destroyed`.
+ * Destroy the model and mark it as `.destroyed`
+ * and invoke `fn(err)`.
  *
  * Events:
  *
@@ -128,6 +129,7 @@ exports.destroy = function(fn){
   var url = this.url();
   fn = fn || noop;
   request.del(url, function(res){
+    if (res.error) return fn(error(res));
     self.emit('destroy');
     self.destroyed = true;
     fn();
@@ -152,6 +154,7 @@ exports.save = function(fn){
   fn = fn || noop;
   if (!this.isValid()) return fn(new Error('validation failed'));
   request.post(url, self, function(res){
+    if (res.error) return fn(error(res));
     if (res.body) self.primary(res.body.id);
     self.dirty = {};
     self.emit('save');
@@ -172,6 +175,7 @@ exports.update = function(fn){
   fn = fn || noop;
   if (!this.isValid()) return fn(new Error('validation failed'));
   request.put(url, self, function(res){
+    if (res.error) return fn(error(res));
     self.dirty = {};
     self.emit('save');
     fn();
@@ -249,3 +253,15 @@ exports.has = function(attr){
 exports.toJSON = function(){
   return this.attrs;
 };
+
+/**
+ * Response error helper.
+ *
+ * @param {Response} er
+ * @return {Error}
+ * @api private
+ */
+
+function error(res) {
+  return new Error('got ' + res.status + ' response');
+}
