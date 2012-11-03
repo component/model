@@ -71,10 +71,10 @@ exports.attr = function(name, options){
   // getter / setter method
   this.prototype[name] = function(val){
     if (0 == arguments.length) return this.attrs[name];
-    this.emit('change', name, val, this.attrs[name]);
-    this.emit('change ' + name, val, this.attrs[name]);
     this.dirty[name] = val;
     this.attrs[name] = val;
+    this.emit('change', name, val, this.attrs[name]);
+    this.emit('change ' + name, val, this.attrs[name]);
     return this;
   };
 
