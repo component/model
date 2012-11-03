@@ -14,7 +14,7 @@
     "component/each": "*",
     "component/json": "*",
     "component/emitter": "*",
-    "component/enumerable": "*",
+    "component/collection": "*",
     "visionmedia/superagent": "*"
   },
   "development": {
@@ -24,7 +24,6 @@
   },
   "scripts": [
     "lib/index.js",
-    "lib/collection.js",
     "lib/static.js",
     "lib/proto.js"
   ],
