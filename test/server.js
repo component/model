@@ -15,7 +15,7 @@ app.use(express.static(__dirname + '/..'));
 
 // faux db
 
-var db = { pets: [] };
+var db = { pets: [], users: [] };
 
 // routes
 
@@ -68,6 +68,36 @@ app.del('/pet/:id', function(req, res){
   if (!pet) return res.send(404, 'cant find pet');
   db.pets.splice(pet.id, 1);
   res.send(200);
+});
+
+// users
+
+/**
+ * DELETE all users.
+ */
+
+app.del('/user/all', function(req, res){
+  db.users = [];
+  res.send(200);
+});
+
+/**
+ * GET all users.
+ */
+
+app.get('/user/all', function(req, res){
+  res.send(db.users);
+});
+
+/**
+ * POST a new user.
+ */
+
+app.post('/user', function(req, res){
+  var user = req.body;
+  var id = db.users.push(user) - 1;
+  user.id = id;
+  res.send({ id: id });
 });
 
 app.listen(3000);

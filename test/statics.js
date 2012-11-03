@@ -25,3 +25,31 @@ describe('Model.attrs', function(){
     assert('number' == User.attrs.age.type);
   })
 })
+
+describe('Model.all(fn)', function(){
+  beforeEach(function(done){
+    User.destroyAll(done);
+  });
+
+  beforeEach(function(done){
+    var tobi = new User({ name: 'tobi' });
+    var loki = new User({ name: 'loki' });
+    var jane = new User({ name: 'jane' });
+    tobi.save(function(){
+      loki.save(function(){
+        jane.save(done);
+      });
+    });
+  })
+
+  it('should respond with an array of all', function(done){
+    User.all(function(err, users){
+      assert(!err);
+      assert(3 == users.length);
+      assert('tobi' == users[0].name());
+      assert('loki' == users[1].name());
+      assert('jane' == users[2].name());
+      done();
+    });
+  })
+})

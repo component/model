@@ -83,6 +83,42 @@ exports.attr = function(name, options){
 };
 
 /**
+ * Destroy all and invoke `fn(err)`.
+ *
+ * @param {Function} fn
+ * @api public
+ */
+
+exports.destroyAll = function(fn){
+  var self = this;
+  var url = this.url('all');
+  request.del(url, function(res){
+    if (res.error) return fn(error(res));
+    fn();
+  });
+};
+
+/**
+ * Get all and invoke `fn(err, array)`.
+ *
+ * @param {Function} fn
+ * @api public
+ */
+
+exports.all = function(fn){
+  var self = this;
+  var url = this.url('all');
+  request.get(url, function(res){
+    if (res.error) return fn(error(res));
+    var arr = [];
+    for (var i = 0, len = res.body.length; i < len; ++i) {
+      arr.push(new self(res.body[i]));
+    }
+    fn(null, arr);
+  });
+};
+
+/**
  * Get `id` and invoke `fn(err, model)`.
  *
  * @param {Mixed} id
