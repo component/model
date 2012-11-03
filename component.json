@@ -1,9 +1,10 @@
 {
   "name": "model",
   "repo": "component/model",
-  "description": "Data models",
+  "description": "Elegant data models",
   "version": "0.0.1",
   "keywords": [
+    "collection",
     "model",
     "orm",
     "db",
@@ -22,10 +23,11 @@
     "component/domify": "*"
   },
   "scripts": [
-    "index.js",
-    "collection.js",
-    "static.js",
-    "proto.js"
+    "lib/index.js",
+    "lib/collection.js",
+    "lib/static.js",
+    "lib/proto.js"
   ],
+  "main": "lib/index.js",
   "license": "MIT"
 }
