@@ -16,6 +16,7 @@
     "visionmedia/superagent": "*"
   },
   "development": {
+    "component/reactive": "*",
     "component/assert": "*",
     "component/domify": "*"
   },
