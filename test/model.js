@@ -249,18 +249,11 @@ describe('Model#save(fn)', function(){
 })
 
 describe('Model#url(path)', function(){
-  // it('should construct a pathname', function(){
-  //   var user = new User;
-  //   assert('/user/edit' == user.url('edit'));
-  // })
-
-  describe('when .isNew()', function(){
-    it('should include .id', function(){
-      var user = new User;
-      user.id(5);
-      assert('/user/5' == user.url());
-      assert('/user/5/edit' == user.url('edit'));
-    })
+  it('should include .id', function(){
+    var user = new User;
+    user.id(5);
+    assert('/user/5' == user.url());
+    assert('/user/5/edit' == user.url('edit'));
   })
 })
 
