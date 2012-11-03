@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <style>
+      body {
+        font: 12px Helvetica, Arial;
+        padding: 50px;
+      }
+      .user .petCount {
+        font-weight: bold;
+      }
+    </style>
+
+    <div class="user">
+      <h1 class="name">Name</h1>
+      <p><span class="name">Name</span> is a <span class="age">age</span>
+        year old <span class="profession"></span> with <span class="petCount">n</span> pets.</p>
+    </div>
+
+    <script src="../../build/build.js"></script>
+
+    <script>
+      var el = document.querySelector('.user');
+      var reactive = require('component-reactive');
+      var model = require('model');
+
+      var User = model('User')
+        .attr('name')
+        .attr('age')
+        .attr('profession')
+
+      User.prototype.petCount = function(){
+        return this.pets.length;
+      };
+
+      var tj = new User({ name: 'TJ', age: 25, profession: 'Software Engineer' });
+      tj.pets = ['tobi', 'loki', 'jane', 'manny', 'luna', 'abby', 'ewald', 'bandit', 'simon'];
+      reactive(el, tj);
+
+      setTimeout(function(){
+        tj.profession('Zoo Keeper');
+      }, 2000);
+
+      setTimeout(function(){
+        tj.name('Tyler');
+      }, 3000);
+    </script>
+  </body>
+</html>
