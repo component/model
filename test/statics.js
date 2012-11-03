@@ -32,9 +32,9 @@ describe('Model.all(fn)', function(){
   });
 
   beforeEach(function(done){
-    var tobi = new User({ name: 'tobi' });
-    var loki = new User({ name: 'loki' });
-    var jane = new User({ name: 'jane' });
+    var tobi = new User({ name: 'tobi', age: 2 });
+    var loki = new User({ name: 'loki', age: 1 });
+    var jane = new User({ name: 'jane', age: 8 });
     tobi.save(function(){
       loki.save(function(){
         jane.save(done);
@@ -42,13 +42,13 @@ describe('Model.all(fn)', function(){
     });
   })
 
-  it('should respond with an array of all', function(done){
+  it('should respond with a collection of all', function(done){
     User.all(function(err, users){
       assert(!err);
-      assert(3 == users.length);
-      assert('tobi' == users[0].name());
-      assert('loki' == users[1].name());
-      assert('jane' == users[2].name());
+      assert(3 == users.length());
+      assert('tobi' == users.at(0).name());
+      assert('loki' == users.at(1).name());
+      assert('jane' == users.at(2).name());
       done();
     });
   })

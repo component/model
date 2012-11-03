@@ -13,6 +13,7 @@
     "component/each": "*",
     "component/json": "*",
     "component/emitter": "*",
+    "component/enumerable": "*",
     "visionmedia/superagent": "*"
   },
   "development": {
@@ -22,6 +23,7 @@
   },
   "scripts": [
     "index.js",
+    "collection.js",
     "static.js",
     "proto.js"
   ],

@@ -3,7 +3,8 @@
  * Module dependencies.
  */
 
-var request = require('superagent');
+var request = require('superagent')
+  , Collection = require('./collection');
 
 /**
  * Construct a url to the given `path`.
@@ -110,11 +111,11 @@ exports.all = function(fn){
   var url = this.url('all');
   request.get(url, function(res){
     if (res.error) return fn(error(res));
-    var arr = [];
+    var col = new Collection;
     for (var i = 0, len = res.body.length; i < len; ++i) {
-      arr.push(new self(res.body[i]));
+      col.push(new self(res.body[i]));
     }
-    fn(null, arr);
+    fn(null, col);
   });
 };
 
