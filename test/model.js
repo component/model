@@ -162,6 +162,18 @@ describe('Model#destroy()', function(){
         pet.destroy();
       });
     })
+
+    it('should emit "destroy" on the constructor', function(done){
+      var pet = new Pet({ name: 'Tobi' });
+      pet.save(function(err){
+        assert(!err);
+        Pet.once('destroy', function(obj){
+          assert(pet == obj);
+          done();
+        });
+        pet.destroy();
+      });
+    })
   })
 })
 
