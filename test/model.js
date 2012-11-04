@@ -222,6 +222,15 @@ describe('Model#save(fn)', function(){
         pet.on('save', done);
         pet.save();
       })
+
+      it('should emit "save" on the constructor', function(done){
+        var pet = new Pet({ name: 'Tobi', species: 'Ferret' });
+        Pet.once('save', function(obj){
+          assert(pet == obj);
+          done();
+        });
+        pet.save();
+      })
     })
 
     describe('and invalid', function(){
@@ -282,6 +291,18 @@ describe('Model#save(fn)', function(){
         pet.save(function(err){
           assert(!err);
           pet.on('save', done);
+          pet.save();
+        });
+      })
+
+      it('should emit "save" on the constructor', function(done){
+        var pet = new Pet({ name: 'Tobi', species: 'Ferret' });
+        pet.save(function(err){
+          assert(!err);
+          Pet.once('save', function(obj){
+            assert(pet == obj);
+            done();
+          });
           pet.save();
         });
       })
