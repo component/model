@@ -163,6 +163,15 @@ describe('Model#destroy()', function(){
       });
     })
 
+    it('should emit "destroying"', function(done){
+      var pet = new Pet({ name: 'Tobi' });
+      pet.save(function(err){
+        assert(!err);
+        pet.on('destroying', done);
+        pet.destroy();
+      });
+    })
+
     it('should emit "destroy" on the constructor', function(done){
       var pet = new Pet({ name: 'Tobi' });
       pet.save(function(err){
