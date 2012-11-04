@@ -184,3 +184,11 @@ user.save(function(err){
   Destroy and invoke optional `fn(err)`.
 
   Emits "destroy" when successfully deleted.
+
+## Links
+
+  - [Plugins](https://github.com/component/model/wiki/Plugins) for model
+
+# License
+
+  MIT
