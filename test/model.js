@@ -180,8 +180,17 @@ describe('Model#save(fn)', function(){
 
       it('should emit "saving"', function(done){
         var pet = new Pet({ name: 'Tobi', species: 'Ferret' });
-        pet.on('saveing', function(){
+        pet.on('saving', function(){
           assert(pet.isNew());
+          done();
+        });
+        pet.save();
+      })
+
+      it('should emit "saving" on the constructor', function(done){
+        var pet = new Pet({ name: 'Tobi', species: 'Ferret' });
+        Pet.once('saving', function(obj){
+          assert(pet == obj);
           done();
         });
         pet.save();
@@ -231,7 +240,18 @@ describe('Model#save(fn)', function(){
         var pet = new Pet({ name: 'Tobi', species: 'Ferret' });
         pet.save(function(err){
           assert(!err);
-          pet.on('saveing', done);
+          pet.on('saving', done);
+          pet.save();
+        });
+      })
+
+      it('should emit "saving" on the constructor', function(done){
+        var pet = new Pet({ name: 'Tobi', species: 'Ferret' });
+        pet.save(function(){
+          Pet.once('saving', function(obj){
+            assert(pet == obj);
+            done();
+          });
           pet.save();
         });
       })
