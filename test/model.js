@@ -178,6 +178,15 @@ describe('Model#save(fn)', function(){
         });
       })
 
+      it('should emit "saving"', function(done){
+        var pet = new Pet({ name: 'Tobi', species: 'Ferret' });
+        pet.on('saveing', function(){
+          assert(pet.isNew());
+          done();
+        });
+        pet.save();
+      })
+
       it('should emit "save"', function(done){
         var pet = new Pet({ name: 'Tobi', species: 'Ferret' });
         pet.on('save', done);
@@ -215,6 +224,15 @@ describe('Model#save(fn)', function(){
               done();
             });
           });
+        });
+      })
+
+      it('should emit "saving"', function(done){
+        var pet = new Pet({ name: 'Tobi', species: 'Ferret' });
+        pet.save(function(err){
+          assert(!err);
+          pet.on('saveing', done);
+          pet.save();
         });
       })
 
