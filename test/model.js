@@ -130,11 +130,11 @@ describe('Model#has(attr)', function(){
   })
 })
 
-describe('Model#destroy()', function(){
+describe('Model#remove()', function(){
   describe('when new', function(){
     it('should error', function(done){
       var pet = new Pet;
-      pet.destroy(function(err){
+      pet.remove(function(err){
         assert('not saved' == err.message);
         done();
       });
@@ -146,41 +146,41 @@ describe('Model#destroy()', function(){
       var pet = new Pet({ name: 'Tobi' });
       pet.save(function(err){
         assert(!err);
-        pet.destroy(function(err){
+        pet.remove(function(err){
           assert(!err);
-          assert(pet.destroyed);
+          assert(pet.removed);
           done();
         });
       });
     })
 
-    it('should emit "destroy"', function(done){
+    it('should emit "remove"', function(done){
       var pet = new Pet({ name: 'Tobi' });
       pet.save(function(err){
         assert(!err);
-        pet.on('destroy', done);
-        pet.destroy();
+        pet.on('remove', done);
+        pet.remove();
       });
     })
 
-    it('should emit "destroying"', function(done){
+    it('should emit "removing"', function(done){
       var pet = new Pet({ name: 'Tobi' });
       pet.save(function(err){
         assert(!err);
-        pet.on('destroying', done);
-        pet.destroy();
+        pet.on('removing', done);
+        pet.remove();
       });
     })
 
-    it('should emit "destroy" on the constructor', function(done){
+    it('should emit "remove" on the constructor', function(done){
       var pet = new Pet({ name: 'Tobi' });
       pet.save(function(err){
         assert(!err);
-        Pet.once('destroy', function(obj){
+        Pet.once('remove', function(obj){
           assert(pet == obj);
           done();
         });
-        pet.destroy();
+        pet.remove();
       });
     })
   })

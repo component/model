@@ -28,7 +28,7 @@ describe('Model.attrs', function(){
 
 describe('Model.all(fn)', function(){
   beforeEach(function(done){
-    User.destroyAll(done);
+    User.removeAll(done);
   });
 
   beforeEach(function(done){
