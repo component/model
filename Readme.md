@@ -1,4 +1,3 @@
-
 # model
 
   W.I.P minimalistic extensible model component.
@@ -40,6 +39,15 @@ var Post = model('Post')
   .attr('body', { required: true, type: 'string' })
   .attr('created_at', { type: 'date' })
   .attr('updated_at', { type: 'date' })
+
+//alternatively
+var Post = model('Post', {
+  id: { required: true, type: 'number' },
+  title: { required: true, type: 'string' },
+  body: { required: true, type: 'string' },
+  created_at: { type: 'date' },
+  updated_at: { type: 'date' }})
+
 ```
 
 ### .validate(fn)
