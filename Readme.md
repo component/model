@@ -1,4 +1,3 @@
-
 # model
 
   W.I.P minimalistic extensible model component.
@@ -41,7 +40,7 @@ var Post = model('Post')
   .attr('created_at', { type: 'date' })
   .attr('updated_at', { type: 'date' })
 
-##alternatively
+//alternatively
 var Post = model('Post', {
   id: { required: true, type: 'number' },
   title: { required: true, type: 'string' },
