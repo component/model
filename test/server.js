@@ -76,7 +76,7 @@ app.del('/pet/:id', function(req, res){
  * DELETE all users.
  */
 
-app.del('/user/all', function(req, res){
+app.del('/user', function(req, res){
   db.users = [];
   res.send(200);
 });
@@ -85,7 +85,7 @@ app.del('/user/all', function(req, res){
  * GET all users.
  */
 
-app.get('/user/all', function(req, res){
+app.get('/user', function(req, res){
   res.send(db.users);
 });
 
