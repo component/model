@@ -189,6 +189,14 @@ user.save(function(err){
 
   - [Plugins](https://github.com/component/model/wiki/Plugins) for model
 
+## Testing
+
+```
+$ npm install
+$ make test &
+$ open http://localhost:3000
+```
+
 # License
 
   MIT
