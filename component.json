@@ -25,7 +25,8 @@
   "scripts": [
     "lib/index.js",
     "lib/static.js",
-    "lib/proto.js"
+    "lib/proto.js",
+    "lib/sync.js"
   ],
   "main": "lib/index.js",
   "license": "MIT"
