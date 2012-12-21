@@ -9,7 +9,6 @@
     "each": "component/each",
     "superagent": "visionmedia/superagent",
     "emitter" : "component/emitter",
-    "collection" : "component/collection",
     "json" : "component/json"
   }
 }
