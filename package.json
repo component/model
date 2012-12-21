@@ -1,5 +1,5 @@
 {
-  "name": "model-component2",
+  "name": "node-model",
   "version": "0.0.1",
   "devDependencies": {
     "express": "3.0.0"
