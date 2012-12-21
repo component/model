@@ -1,5 +1,5 @@
 {
-  "name": "model-matthewmueller",
+  "name": "model",
   "repo" : "matthewmueller/model",
   "version": "0.0.1",
   "main": "lib/index.js",
