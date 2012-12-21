@@ -1,7 +1,13 @@
 {
-  "name": "node-model",
+  "name": "model-matthewmueller",
+  "repo" : "matthewmueller/model",
   "version": "0.0.1",
+  "main": "lib/index.js",
   "devDependencies": {
     "express": "3.0.0"
+  },
+  "dependencies": {
+    "superagent": "~0.10.0",
+    "emitter-component": "0.0.6"
   }
 }
