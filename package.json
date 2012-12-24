@@ -6,9 +6,9 @@
     "express": "3.0.0"
   },
   "dependencies": {
-    "each": "component/each",
-    "superagent": "visionmedia/superagent",
-    "emitter" : "component/emitter",
-    "json" : "component/json"
+    "is-browser": "~1.0.0",
+    "emitter-component": "0.0.6",
+    "each-component": "~0.0.1",
+    "superagent": "~0.10.0"
   }
 }

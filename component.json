@@ -12,10 +12,10 @@
   ],
   "dependencies": {
     "component/each": "*",
-    "component/json": "*",
     "component/emitter": "*",
     "component/collection": "*",
-    "visionmedia/superagent": "*"
+    "visionmedia/superagent": "*",
+    "ForbesLindesay/is-browser": "*"
   },
   "development": {
     "component/reactive": "*",
