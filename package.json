@@ -1,5 +1,5 @@
 {
-  "name": "model",
+  "name": "node-model",
   "version": "0.0.1",
   "main": "lib/index.js",
   "devDependencies": {
