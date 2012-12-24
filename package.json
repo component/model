@@ -8,7 +8,6 @@
   "dependencies": {
     "is-browser": "~1.0.0",
     "emitter-component": "0.0.6",
-    "each-component": "~0.0.1",
     "superagent": "~0.10.0"
   }
 }
