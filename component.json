@@ -26,6 +26,7 @@
     "lib/index.js",
     "lib/static.js",
     "lib/proto.js",
+    "lib/common.js",
     "lib/sync.js"
   ],
   "main": "lib/index.js",
