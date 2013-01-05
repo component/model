@@ -62,7 +62,7 @@ User.url('add')
 // => "/users/add"
 ```
 
-### #ATTR()
+### .ATTR()
 
   "Getter" function generated when `Model.attr(name)` is called.
 
@@ -76,7 +76,7 @@ post.title('Ferrets')
 post.body('Make really good pets')
 ```
 
-### #ATTR(value)
+### .ATTR(value)
 
   "Setter" function generated when `Model.attr(name)` is called.
 
@@ -109,23 +109,23 @@ post.on('change title', function(val, prev){
 
 ```
 
-### #isNew()
+### .isNew()
 
   Returns `true` if the model is unsaved.
 
-### #toJSON()
+### .toJSON()
 
   Return a JSON representation of the model (its attributes).
 
-### #has(attr)
+### .has(attr)
 
   Check if `attr` is non-`null`.
 
-### #get(attr)
+### .get(attr)
 
   Get `attr`'s value.
 
-### #set(attrs)
+### .set(attrs)
 
   Set multiple `attrs`.
 
@@ -133,17 +133,17 @@ post.on('change title', function(val, prev){
 user.set({ name: 'Tobi', age: 2 })
 ```
 
-### #changed([attr])
+### .changed([attr])
 
   Check if the model is "dirty" and return an object
   of changed attributes. Optionally check a specific `attr`
   and return a `Boolean`.
 
-### #error(attr, msg)
+### .error(attr, msg)
 
   Define error `msg` for `attr`.
 
-### #isValid()
+### .isValid()
 
   Run validations and check if the model is valid.
 
@@ -155,7 +155,7 @@ user.errors
 // => [{ attr: ..., message: ... }]
 ```
 
-### #url([path])
+### .url([path])
 
   Return this model's base url or relative to `path`:
 
@@ -165,7 +165,7 @@ user.url('edit');
 // => "/users/5/edit"
 ```
 
-### #save(fn)
+### .save(fn)
 
   Save or update and invoke the given callback `fn(err)`.
 
@@ -173,13 +173,13 @@ user.url('edit');
 var user = new User({ name: 'Tobi' })
 
 user.save(function(err){
-  
+
 })
 ```
 
   Emits "save" when complete.
 
-### #destroy([fn])
+### .destroy([fn])
 
   Destroy and invoke optional `fn(err)`.
 
