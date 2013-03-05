@@ -167,7 +167,9 @@ describe('Model#remove()', function(){
       var pet = new Pet({ name: 'Tobi' });
       pet.save(function(err){
         assert(!err);
-        pet.on('removing', done);
+        pet.on('removing', function() {
+          done();
+        });
         pet.remove();
       });
     })
@@ -231,6 +233,20 @@ describe('Model#save(fn)', function(){
         });
         pet.save();
       })
+
+      it('should handle async plugins', function(done){
+        var pet = new Pet({ name: 'Tobi', species: 'Ferret' });
+        pet.on('saving', function(pet, next) {
+          setTimeout(function() {
+            next();
+          }, 100);
+        });
+        Pet.once('save', function(obj){
+          assert(pet == obj);
+          done();
+        });
+        pet.save();
+      })
     })
 
     describe('and invalid', function(){
@@ -270,7 +286,9 @@ describe('Model#save(fn)', function(){
         var pet = new Pet({ name: 'Tobi', species: 'Ferret' });
         pet.save(function(err){
           assert(!err);
-          pet.on('saving', done);
+          pet.on('saving', function() {
+            done();
+          });
           pet.save();
         });
       })

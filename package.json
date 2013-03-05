@@ -1,7 +1,13 @@
 {
-  "name": "model",
-  "version": "0.0.0",
+  "name": "node-model",
+  "version": "0.0.2",
+  "main": "lib/index.js",
   "devDependencies": {
     "express": "3.0.0"
+  },
+  "dependencies": {
+    "is-browser": "~1.0.0",
+    "emitter-component": "0.0.6",
+    "superagent": "~0.10.0"
   }
 }

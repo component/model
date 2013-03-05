@@ -2,7 +2,7 @@
   "name": "model",
   "repo": "component/model",
   "description": "Elegant data models",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "keywords": [
     "collection",
     "model",
@@ -12,10 +12,10 @@
   ],
   "dependencies": {
     "component/each": "*",
-    "component/json": "*",
     "component/emitter": "*",
     "component/collection": "*",
-    "visionmedia/superagent": "*"
+    "visionmedia/superagent": "*",
+    "ForbesLindesay/is-browser": "*"
   },
   "development": {
     "component/reactive": "*",
@@ -25,7 +25,9 @@
   "scripts": [
     "lib/index.js",
     "lib/static.js",
-    "lib/proto.js"
+    "lib/proto.js",
+    "lib/common.js",
+    "lib/sync.js"
   ],
   "main": "lib/index.js",
   "license": "MIT"
