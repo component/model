@@ -186,6 +186,12 @@ describe('Model#remove()', function(){
   })
 })
 
+describe('Model#destroy()', function(){
+  it('should be an alias for remove', function(){
+    assert(Pet.prototype.remove === Pet.prototype.destroy);
+  })
+})
+
 describe('Model#save(fn)', function(){
   beforeEach(reset);
 
