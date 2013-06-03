@@ -41,6 +41,16 @@ describe('new Model(object)', function(){
     assert('Tobi' == user.name());
     assert(2 == user.age());
   })
+
+  it('should emit "construct" event', function(done){
+    User.on('construct', function(user, attrs){
+      assert('Tobi' == user.name());
+      assert('Tobi' == attrs.name);
+      User.off('construct');
+      done();
+    });
+    new User({ name: 'Tobi' });
+  })
 })
 
 describe('Model(object)', function(){
