@@ -344,9 +344,10 @@ describe('Model#url(path)', function(){
 })
 
 describe('Model#toJSON()', function(){
-  it('should return the attributes', function(){
+  it('should return a copy of the attributes', function(){
     var user = new User({ name: 'Tobi', age: 2 });
     var obj = user.toJSON();
+    assert(obj !== user.attrs);
     assert('Tobi' == obj.name);
     assert(2 == obj.age);
   })
