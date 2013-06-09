@@ -140,11 +140,11 @@ describe('Model#has(attr)', function(){
   })
 })
 
-describe('Model#remove()', function(){
+describe('Model#destroy()', function(){
   describe('when new', function(){
     it('should error', function(done){
       var pet = new Pet;
-      pet.remove(function(err){
+      pet.destroy(function(err){
         assert('not saved' == err.message);
         done();
       });
@@ -156,49 +156,55 @@ describe('Model#remove()', function(){
       var pet = new Pet({ name: 'Tobi' });
       pet.save(function(err){
         assert(!err);
-        pet.remove(function(err){
+        pet.destroy(function(err){
           assert(!err);
-          assert(pet.removed);
+          assert(pet.destroyed);
           done();
         });
       });
     })
 
-    it('should emit "remove"', function(done){
+    it('should emit "destroy"', function(done){
       var pet = new Pet({ name: 'Tobi' });
       pet.save(function(err){
         assert(!err);
-        pet.on('remove', done);
-        pet.remove();
+        pet.on('destroy', done);
+        pet.destroy();
       });
     })
 
-    it('should emit "removing"', function(done){
+    it('should emit "destroying" on the constructor', function(done){
       var pet = new Pet({ name: 'Tobi' });
       pet.save(function(err){
         assert(!err);
-        pet.on('removing', done);
-        pet.remove();
-      });
-    })
-
-    it('should emit "remove" on the constructor', function(done){
-      var pet = new Pet({ name: 'Tobi' });
-      pet.save(function(err){
-        assert(!err);
-        Pet.once('remove', function(obj){
+        Pet.once('destroying', function(obj){
           assert(pet == obj);
           done();
         });
-        pet.remove();
+        pet.destroy();
       });
     })
-  })
-})
 
-describe('Model#destroy()', function(){
-  it('should be an alias for remove', function(){
-    assert(Pet.prototype.remove === Pet.prototype.destroy);
+    it('should emit "destroy"', function(done){
+      var pet = new Pet({ name: 'Tobi' });
+      pet.save(function(err){
+        assert(!err);
+        pet.on('destroy', done);
+        pet.destroy();
+      });
+    })
+
+    it('should emit "destroy" on the constructor', function(done){
+      var pet = new Pet({ name: 'Tobi' });
+      pet.save(function(err){
+        assert(!err);
+        Pet.once('destroy', function(obj){
+          assert(pet == obj);
+          done();
+        });
+        pet.destroy();
+      });
+    })
   })
 })
 
