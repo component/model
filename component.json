@@ -15,6 +15,7 @@
     "component/json": "*",
     "component/emitter": "*",
     "component/collection": "*",
+    "component/bind": "*",
     "visionmedia/superagent": "*"
   },
   "development": {
