@@ -20,6 +20,10 @@ var Pet = model('Pet')
   .attr('id')
   .attr('name')
   .attr('species')
+  .attr('age')
+  .computed('dogyears', ['age'], function() {
+    return this.age() * 7;
+  })
   .use(required('name'));
 
 function reset(fn) {
@@ -83,6 +87,34 @@ describe('Model#.<attr>(value)', function(){
     user.name('Luna');
   })
 })
+
+describe('Model#computed(prop, deps, fn)', function(){
+  it('should compute a property ', function () {
+    var dog = new Pet({ name: 'Tobi', age: 2 });
+    assert(dog.dogyears() === 14);
+  });
+
+  it('should emit "change PROP" events when dependent properties change', function(done) {
+    var dog = new Pet({ name: 'Tobi', age: 2 });
+    dog.on('change dogyears', function(model, val) {
+      assert(val === 49);
+      assert(model.dogyears() === 49);
+      done();
+    });
+    dog.age(7);
+  });
+
+  it('should emit "change" events when dependent properties change', function(done) {
+    var dog = new Pet({ name: 'Tobi', age: 2 });
+    dog.on('change', function(name, model, val) {
+      assert(name === 'dogyears');
+      assert(val === 49);
+      assert(model.dogyears() === 49);
+      done();
+    });
+    dog.age(7);
+  });
+});
 
 describe('Model#isNew()', function(){
   it('should default to true', function(){

@@ -109,6 +109,20 @@ post.on('change title', function(val, prev){
 
 ```
 
+### .computed(prop, deps, fn)
+
+  Defines a computed property with the given dependencies
+
+```js
+var Dog = model('Dog')
+  .attr('age')
+  .computed('dogyears', ['age'], function(){
+    return this.age() * 7;
+  });
+```
+  - Emits "change PROP" event with `(model, val)`.
+  - Emits "change" event with `(name, model, val)`.
+
 ### .isNew()
 
   Returns `true` if the model is unsaved.
