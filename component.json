@@ -13,11 +13,11 @@
   "dependencies": {
     "component/each": "0.0.1",
     "component/emitter": "1.0.1",
-    "component/collection": "0.0.1",
+    "component/collection": "*",
     "visionmedia/superagent": "0.15.1"
   },
   "development": {
-    "component/reactive": "0.11.0",
+    "component/reactive": "0.13.0",
     "component/assert": "*",
     "component/domify": "*"
   },
