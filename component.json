@@ -11,6 +11,7 @@
     "database"
   ],
   "dependencies": {
+    "component/clone": "*",
     "component/each": "*",
     "component/json": "*",
     "component/emitter": "*",

@@ -115,7 +115,7 @@ post.on('change title', function(val, prev){
 
 ### .toJSON()
 
-  Return a JSON representation of the model (its attributes).
+  Return a cloned JSON representation of the model (its attributes).
 
 ### .has(attr)
 
