@@ -3,8 +3,8 @@
  * Module dependencies.
  */
 
-var express = require('express')
-  , app = express();
+var express = require('express');
+var app = express();
 
 // middleware
 

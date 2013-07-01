@@ -1,7 +1,7 @@
 
-var model = require('model')
-  , assert = require('component-assert')
-  , request = require('visionmedia-superagent/lib/client'); // TODO: fix builder
+var model = require('model');
+var assert = require('assert');
+var request = require('superagent');
 
 var User = model('User')
   .attr('id', { type: 'number' })

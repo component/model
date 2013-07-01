@@ -1,6 +1,6 @@
 
-var model = require('model')
-  , assert = require('component-assert');
+var model = require('model');
+var assert = require('assert');
 
 var User = model('User')
   .attr('id', { type: 'number' })
