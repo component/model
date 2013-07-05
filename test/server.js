@@ -25,6 +25,7 @@ var db = { pets: [], users: [] };
 
 app.del('/', function(req, res){
   db.pets = [];
+  db.users = [];
   res.send(200);
 });
 
