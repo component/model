@@ -62,6 +62,17 @@ User.url('add')
 // => "/users/add"
 ```
 
+### .headers({header: value})
+
+  Sets custom headers for static and method requests on the model.
+
+```js  
+User.headers({
+  'X-CSRF-Token': 'some token',
+  'X-API-Token': 'api token 
+});
+```
+
 ### .ATTR()
 
   "Getter" function generated when `Model.attr(name)` is called.
