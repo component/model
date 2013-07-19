@@ -6,16 +6,17 @@ var User = model('User')
   .attr('id', { type: 'number' })
   .attr('name', { type: 'string' })
   .attr('age', { type: 'number' })
+  .headers({'X-API-TOKEN': 'token string'})
 
 describe('Model.url()', function(){
   it('should return the base url', function(){
-    assert('/user' == User.url());
+    assert('/users' == User.url());
   })
 })
 
 describe('Model.url(string)', function(){
   it('should join', function(){
-    assert('/user/edit' == User.url('edit'));
+    assert('/users/edit' == User.url('edit'));
   })
 })
 
@@ -28,7 +29,7 @@ describe('Model.attrs', function(){
 
 describe('Model.all(fn)', function(){
   beforeEach(function(done){
-    User.removeAll(done);
+    User.destroyAll(done);
   });
 
   beforeEach(function(done){
@@ -43,8 +44,10 @@ describe('Model.all(fn)', function(){
   })
 
   it('should respond with a collection of all', function(done){
-    User.all(function(err, users){
+    User.all(function(err, users, res){
       assert(!err);
+      assert(res);
+      assert(res.req.header['X-API-TOKEN'] == 'token string')
       assert(3 == users.length());
       assert('tobi' == users.at(0).name());
       assert('loki' == users.at(1).name());

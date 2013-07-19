@@ -25,6 +25,7 @@ var db = { pets: [], users: [] };
 
 app.del('/', function(req, res){
   db.pets = [];
+  db.users = [];
   res.send(200);
 });
 
@@ -32,7 +33,7 @@ app.del('/', function(req, res){
  * GET pet :id.
  */
 
-app.get('/pet/:id', function(req, res){
+app.get('/pets/:id', function(req, res){
   var pet = db.pets[req.params.id];
   if (!pet) return res.send(404, 'cant find pet');
   res.send(pet);
@@ -42,7 +43,7 @@ app.get('/pet/:id', function(req, res){
  * POST to create a new pet.
  */
 
-app.post('/pet', function(req, res){
+app.post('/pets', function(req, res){
   var pet = req.body;
   pet.id = db.pets.push(pet) - 1;
   res.send(pet);
@@ -52,7 +53,7 @@ app.post('/pet', function(req, res){
  * PUT to update pet :id.
  */
 
-app.put('/pet/:id', function(req, res){
+app.put('/pets/:id', function(req, res){
   var pet = db.pets[req.params.id];
   if (!pet) return res.send(404, 'cant find pet');
   db.pets[pet.id] = req.body;
@@ -63,7 +64,7 @@ app.put('/pet/:id', function(req, res){
  * DELETE pet :id.
  */
 
-app.del('/pet/:id', function(req, res){
+app.del('/pets/:id', function(req, res){
   var pet = db.pets[req.params.id];
   if (!pet) return res.send(404, 'cant find pet');
   db.pets.splice(pet.id, 1);
@@ -76,7 +77,7 @@ app.del('/pet/:id', function(req, res){
  * DELETE all users.
  */
 
-app.del('/user/all', function(req, res){
+app.del('/users', function(req, res){
   db.users = [];
   res.send(200);
 });
@@ -85,7 +86,7 @@ app.del('/user/all', function(req, res){
  * GET all users.
  */
 
-app.get('/user/all', function(req, res){
+app.get('/users', function(req, res){
   res.send(db.users);
 });
 
@@ -93,7 +94,7 @@ app.get('/user/all', function(req, res){
  * POST a new user.
  */
 
-app.post('/user', function(req, res){
+app.post('/users', function(req, res){
   var user = req.body;
   var id = db.users.push(user) - 1;
   user.id = id;

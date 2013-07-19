@@ -7,6 +7,7 @@ var User = model('User')
   .attr('id', { type: 'number' })
   .attr('name', { type: 'string' })
   .attr('age', { type: 'number' })
+  .headers({'X-API-TOKEN': 'token string'});
 
 function required(attr) {
   return function(Model){
@@ -20,7 +21,8 @@ var Pet = model('Pet')
   .attr('id')
   .attr('name')
   .attr('species')
-  .use(required('name'));
+  .use(required('name'))
+  .headers({'X-API-TOKEN': 'token string'});
 
 function reset(fn) {
   request.del('/', function(res){
@@ -205,6 +207,20 @@ describe('Model#destroy()', function(){
         pet.destroy();
       });
     })
+    
+    it('should emit "destroy" and pass response', function(done){
+      var pet = new Pet({ name: 'Tobi' });
+      pet.save(function(err){
+        assert(!err);
+        Pet.once('destroy', function(obj, res){
+          assert(pet == obj);
+          assert(res);
+          assert(res.req.header['X-API-TOKEN'] == 'token string');
+          done();
+        });
+        pet.destroy();
+      });
+    });
   })
 })
 
@@ -347,6 +363,21 @@ describe('Model#save(fn)', function(){
         });
       })
     })
+    
+    it('should have headers and return res object', function(done){
+      var pet = new Pet({ name: 'Tobi' });
+      pet.save(function(err, res){
+        assert(!err);
+        assert(res);
+        assert(res.req.header['X-API-TOKEN'] == 'token string');
+        pet.name(null);
+        pet.save(function(err, res){
+          assert(err);
+          assert(!res); // vadiation error req never made
+          done();
+        });
+      })
+    })
   })
 })
 
@@ -354,8 +385,8 @@ describe('Model#url(path)', function(){
   it('should include .id', function(){
     var user = new User;
     user.id(5);
-    assert('/user/5' == user.url());
-    assert('/user/5/edit' == user.url('edit'));
+    assert('/users/5' == user.url());
+    assert('/users/5/edit' == user.url('edit'));
   })
 })
 
