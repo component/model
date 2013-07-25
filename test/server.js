@@ -9,6 +9,7 @@ var app = express();
 // middleware
 
 app.use(express.logger('dev'));
+app.use(express.query());
 app.use(express.bodyParser());
 app.use(express.static(__dirname));
 app.use(express.static(__dirname + '/..'));
@@ -87,6 +88,13 @@ app.del('/users', function(req, res){
  */
 
 app.get('/users', function(req, res){
+  var age_gte = parseInt(req.query.age_gte);
+  if (age_gte) {
+    res.send(db.users.filter(function(user){
+      return user.age >= age_gte;
+    }));
+    return;
+  }
   res.send(db.users);
 });
 

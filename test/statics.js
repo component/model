@@ -11,12 +11,15 @@ var User = model('User')
 describe('Model.url()', function(){
   it('should return the base url', function(){
     assert('/users' == User.url());
+    assert('/users' == User.url(null));
+    assert('/users' == User.url(undefined));
   })
 })
 
 describe('Model.url(string)', function(){
   it('should join', function(){
     assert('/users/edit' == User.url('edit'));
+    assert('/users/' == User.url(''));
   })
 })
 
@@ -52,6 +55,18 @@ describe('Model.all(fn)', function(){
       assert('tobi' == users.at(0).name());
       assert('loki' == users.at(1).name());
       assert('jane' == users.at(2).name());
+      done();
+    });
+  })
+
+  it('should respond with a sub collection filter by age_gte=2', function(done){
+    User.all({ age_gte: 2 }, function(err, users, res){
+      assert(!err);
+      assert(res);
+      assert(res.req.header['X-API-TOKEN'] == 'token string');
+      assert(2 == users.length());
+      assert('tobi' == users.at(0).name());
+      assert('jane' == users.at(1).name());
       done();
     });
   })
