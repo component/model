@@ -3,5 +3,9 @@
   "version": "0.0.1",
   "devDependencies": {
     "express": "3.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/component/model.git"
   }
 }
