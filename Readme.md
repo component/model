@@ -62,6 +62,21 @@ User.url('add')
 // => "/users/add"
 ```
 
+### .route(path)
+
+  Set base path for urls.
+  Note this is defaulted to `'/' + modelName.toLowerCase() + 's'`
+
+```js
+User.route('/api/u')
+
+User.url()
+// => "/api/u"
+
+User.url('add')
+// => "/api/u/add"
+```
+ 
 ### .headers({header: value})
 
   Sets custom headers for static and method requests on the model.

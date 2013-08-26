@@ -56,3 +56,10 @@ describe('Model.all(fn)', function(){
     });
   })
 })
+
+describe('Model.route(string)', function(){
+  it('should set the base path for url', function(){
+    User.route('/api/u');
+    assert('/api/u/edit' == User.url('edit'));
+  })
+})
