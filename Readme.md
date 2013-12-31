@@ -1,4 +1,3 @@
-
 # model
 
   W.I.P minimalistic extensible model component.
@@ -97,9 +96,10 @@ var Post = model('Post')
   .attr('title')
   .attr('body')
 
-var post = new Post;
-post.title('Ferrets')
-post.body('Make really good pets')
+var post = new Post({ title: 'Cats' });
+
+post.title()
+// => "Cats"
 ```
 
 ### .ATTR(value)
@@ -111,10 +111,7 @@ var Post = model('Post')
   .attr('title')
   .attr('body')
 
-var post = new Post({ title: 'Cats' });
-
-post.title()
-// => "Cats"
+var post = new Post;
 
 post.title('Ferrets')
 post.title()
