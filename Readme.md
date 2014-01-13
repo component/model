@@ -83,7 +83,7 @@ User.url('add')
 ```js  
 User.headers({
   'X-CSRF-Token': 'some token',
-  'X-API-Token': 'api token 
+  'X-API-Token': 'api token' 
 });
 ```
 
