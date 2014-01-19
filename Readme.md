@@ -41,6 +41,20 @@ var Post = model('Post')
   .attr('updated_at', { type: 'date' })
 ```
 
+### .primary(name)
+  
+  Set the primary attribute key's `name`.
+
+```js
+var model = require('model');
+
+var Post = model('Post')
+  .attr('slug')
+  .attr('title')
+  .attr('body')
+  .primary('slug');
+```
+
 ### .validate(fn)
 
   TODO: validation callback docs

@@ -10,7 +10,7 @@ components:
 clean:
 	rm -fr build components template.js
 
-test:
+test: build
 	@node test/server
 
 .PHONY: clean test

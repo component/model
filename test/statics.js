@@ -20,6 +20,13 @@ describe('Model.url(string)', function(){
   })
 })
 
+describe('Model.primary(name)', function(){
+  it('should set the model primary key', function(){
+    User.primary('id');
+    assert('id' == User.primaryKey);
+  })
+})
+
 describe('Model.attrs', function(){
   it('should hold the defined attrs', function(){
     assert('string' == User.attrs.name.type);
