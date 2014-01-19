@@ -30,6 +30,16 @@ function reset(fn) {
   });
 }
 
+describe('model', function(){
+  it('should expose .proto', function(){
+    assert(model.proto.on == model('Pet').prototype.on);
+  })
+
+  it('should expose .statics', function(){
+    assert(model.statics.url == model('Pet').url);
+  })
+})
+
 describe('model(name)', function(){
   it('should return a new model constructor', function(){
     var Something = model('Something');
@@ -207,7 +217,7 @@ describe('Model#destroy()', function(){
         pet.destroy();
       });
     })
-    
+
     it('should emit "destroy" and pass response', function(done){
       var pet = new Pet({ name: 'Tobi' });
       pet.save(function(err){
@@ -363,7 +373,7 @@ describe('Model#save(fn)', function(){
         });
       })
     })
-    
+
     it('should have headers and return res object', function(done){
       var pet = new Pet({ name: 'Tobi' });
       pet.save(function(err, res){
