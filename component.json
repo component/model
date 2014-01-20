@@ -1,8 +1,9 @@
 {
   "name": "model",
   "repo": "component/model",
-  "description": "Elegant data models",
-  "version": "0.1.1",
+  "version": "1.0.0",
+  "license": "MIT",
+  "description": "A super simple, pluggable model.",
   "keywords": [
     "collection",
     "model",
@@ -10,22 +11,17 @@
     "db",
     "database"
   ],
-  "dependencies": {
-    "component/each": "0.0.1",
-    "component/emitter": "1.0.1",
-    "component/collection": "*",
-    "visionmedia/superagent": "0.15.1"
-  },
-  "development": {
-    "component/reactive": "0.13.0",
-    "component/assert": "*",
-    "component/domify": "*"
-  },
+  "main": "lib/index.js",
   "scripts": [
     "lib/index.js",
-    "lib/static.js",
-    "lib/proto.js"
+    "lib/protos.js",
+    "lib/statics.js"
   ],
-  "main": "lib/index.js",
-  "license": "MIT"
+  "dependencies": {
+    "component/clone": "0.1.1",
+    "component/emitter": "1.1.1"
+  },
+  "development": {
+    "component/assert": "*"
+  }
 }
