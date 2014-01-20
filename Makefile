@@ -1,16 +1,17 @@
 
-SRC = $(wildcard lib/*.js)
-
-build: components $(SRC)
+build: components lib/*
 	@component build --dev
 
-components:
+clean:
+	@rm -rf build components node_modules
+
+components: component.json
 	@component install --dev
 
-clean:
-	rm -fr build components template.js
+node_modules: package.json
+	@npm install
 
-test:
-	@node test/server
+test: build
+	@component test phantom
 
 .PHONY: clean test
