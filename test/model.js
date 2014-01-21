@@ -1,5 +1,10 @@
 
-var model = require('model');
+try {
+  var model = require('model');
+} catch (e) {
+  var model = require('..');
+}
+
 var assert = require('assert');
 var request = require('superagent');
 
@@ -207,7 +212,7 @@ describe('Model#destroy()', function(){
         pet.destroy();
       });
     })
-    
+
     it('should emit "destroy" and pass response', function(done){
       var pet = new Pet({ name: 'Tobi' });
       pet.save(function(err){
@@ -363,7 +368,7 @@ describe('Model#save(fn)', function(){
         });
       })
     })
-    
+
     it('should have headers and return res object', function(done){
       var pet = new Pet({ name: 'Tobi' });
       pet.save(function(err, res){

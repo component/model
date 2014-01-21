@@ -1,5 +1,10 @@
 
-var model = require('model');
+try {
+  var model = require('model');
+} catch (e) {
+  var model = require('..');
+}
+
 var assert = require('assert');
 
 var User = model('User')
