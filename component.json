@@ -11,10 +11,10 @@
     "database"
   ],
   "dependencies": {
-    "component/each": "0.0.1",
-    "component/emitter": "1.0.1",
+    "component/each": "0.2.4",
+    "component/emitter": "1.1.2",
     "component/collection": "*",
-    "visionmedia/superagent": "0.15.1"
+    "visionmedia/superagent": "0.18.0"
   },
   "development": {
     "component/reactive": "0.13.0",
