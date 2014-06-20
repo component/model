@@ -6,7 +6,7 @@
   "dependencies": {
     "emitter-component": "~1.1.2",
     "collection": "git://github.com/component/collection#0.0.2",
-    "each-component": "~0.2.4",
+    "component-each": "~0.2.4",
     "superagent": "~0.18.0"
   },
   "devDependencies": {
