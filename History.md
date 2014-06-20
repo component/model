@@ -1,4 +1,10 @@
 
+0.1.3 / 2014-06-20 
+==================
+
+ * fix component/each name in package.json
+ * Update dependencies
+
 0.1.2 / 2014-01-20
 ==================
  
