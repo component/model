@@ -4,7 +4,7 @@
   "repository": "git://github.com/component/model.git",
   "main": "lib/index.js",
   "dependencies": {
-    "emitter-component": "~1.1.2",
+    "component-emitter": "~1.1.2",
     "collection": "git://github.com/component/collection#0.0.2",
     "component-each": "~0.2.4",
     "superagent": "~0.18.0"
