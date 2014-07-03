@@ -79,14 +79,23 @@ describe('Model.onError()', function() {
 
   var _request_get = Car.request.get;
 
-  Car.request.get = function(url) {
-    var req = _request_get(url);
-    req.timeout(30);
-    return req;
-  };
+  before( function(done) {
+    Car.request.get = function(url, data, fn) {
+      var req = _request_get(url, data, fn);
+      req.timeout(1);
+      return req;
+    };
+    done();
+  });
+
+  after( function(done) {
+    Car.request.get = _request_get;
+    done();
+  });
+
 
   it('should be called on errors', function(done) {
-    Car.all(function(err) {
+    Car.all(function(err, res) {
       assert(err.error instanceof Error);
       assert(-1 != err.error.message.indexOf('timeout'));
 
