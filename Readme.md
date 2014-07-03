@@ -207,6 +207,25 @@ user.save(function(err){
   Destroy and invoke optional `fn(err)`.
 
   Emits "destroy" when successfully deleted.
+  
+### .toError(fn)
+
+  Register a custom error handler for the model class and/or model instances.
+  If called on the Model class, the error handler is used for static methods as well as the methods of the model
+  instances. If called on a model instance, the error handler is only used for methods of this instance.
+  
+```js
+var handler1 = function(err, res) {...};
+var handler2 = function(err, res) {...};
+
+var Car = model('Car')
+  .toError(handler1);
+  
+var car1 = new Car(); // uses handler1
+
+var car2 = new Car();
+car2.toError(handler2); // uses handler2
+```
 
 ## Links
 
