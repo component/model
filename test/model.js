@@ -441,3 +441,63 @@ describe('Model#isValid()', function(){
     assert(0 == user.errors.length);
   })
 })
+
+describe('Model#onError()', function() {
+  function getErrorHandler(static) {
+    return function(err, res) {
+      return {error: err, response: res, static: static};
+    };
+  }
+
+  it('should be called on errors', function(done) {
+    var Car = model('Car')
+      .attr('id')
+      .attr('color');
+
+    var car = new Car({color: 'blue'});
+
+    car.onError(getErrorHandler(false));
+
+    car.save(function(err) {
+      assert(null == err.error);
+      assert(500 == err.response.status);
+      assert(false == err.static);
+
+      done();
+    });
+  });
+
+  it('should overwrite the static error handler', function(done) {
+    var Car = model('Car')
+      .attr('id')
+      .attr('color')
+      .onError(getErrorHandler(true));
+
+    var car = new Car({color: 'red'});
+
+    car.onError(getErrorHandler(false));
+
+    car.save(function(err) {
+      assert(null == err.error);
+      assert(500 == err.response.status);
+      assert(false == err.static);
+
+      done();
+    });
+  });
+
+  it('should use the default error handler if not called', function(done) {
+    var Car = model('Car')
+      .attr('id')
+      .attr('color');
+
+    var car = new Car({color: 'yellow'});
+
+    car.save(function(err) {
+      assert(err instanceof Error);
+      assert('got 500 response' == err.message);
+
+      done();
+    });
+  });
+});

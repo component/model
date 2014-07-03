@@ -68,3 +68,52 @@ describe('Model.route(string)', function(){
     assert('/api/u/edit' == User.url('edit'));
   })
 })
+
+describe('Model.onError()', function() {
+  var Car = model('Car')
+    .attr('id')
+    .attr('color')
+    .onError(function(err, res) {
+      return {error: err, response: res};
+    });
+
+  var _request_get = Car.request.get;
+
+  Car.request.get = function(url) {
+    var req = _request_get(url);
+    req.timeout(30);
+    return req;
+  };
+
+  it('should be called on errors', function(done) {
+    Car.all(function(err) {
+      assert(err.error instanceof Error);
+      assert(-1 != err.error.message.indexOf('timeout'));
+
+      done();
+    });
+  });
+
+  it('should be inherited by model instances', function(done) {
+    var car = new Car({color: 'silver'});
+
+    car.save(function(err) {
+      assert(500 == err.response.status);
+
+      done();
+    });
+  });
+
+  it('should use the default error handler if not called', function(done) {
+    var Car = model('Car')
+      .attr('id')
+      .attr('color');
+
+    Car.all(function(err) {
+      assert(err instanceof Error);
+      assert(-1 != err.message.indexOf('timeout'));
+
+      done();
+    });
+  });
+});

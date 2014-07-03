@@ -101,5 +101,21 @@ app.post('/users', function(req, res){
   res.send({ id: id });
 });
 
+app.get('/cars', function(req, res) {
+  setTimeout(function() {
+    res.send([]);
+  }, 500);
+});
+
+app.get('/cars/:id', function(req, res) {
+  setTimeout(function() {
+    res.send({id: req.params.id, color: 'silver'});
+  }, 500);
+});
+
+app.post('/cars', function(req, res) {
+  res.send(500);
+});
+
 app.listen(4000);
 console.log('test server listening on port 4000');
