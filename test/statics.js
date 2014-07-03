@@ -69,11 +69,11 @@ describe('Model.route(string)', function(){
   })
 })
 
-describe('Model.onError()', function() {
+describe('Model.toError()', function() {
   var Car = model('Car')
     .attr('id')
     .attr('color')
-    .onError(function(err, res) {
+    .toError(function(err, res) {
       return {error: err, response: res};
     });
 
@@ -98,7 +98,6 @@ describe('Model.onError()', function() {
     Car.all(function(err, res) {
       assert(err.error instanceof Error);
       assert(-1 != err.error.message.indexOf('timeout'));
-
       done();
     });
   });
@@ -108,7 +107,6 @@ describe('Model.onError()', function() {
 
     car.save(function(err) {
       assert(500 == err.response.status);
-
       done();
     });
   });

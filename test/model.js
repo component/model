@@ -442,7 +442,7 @@ describe('Model#isValid()', function(){
   })
 })
 
-describe('Model#onError()', function() {
+describe('Model#toError()', function() {
   function getErrorHandler(static) {
     return function(err, res) {
       return {error: err, response: res, static: static};
@@ -456,7 +456,7 @@ describe('Model#onError()', function() {
 
     var car = new Car({color: 'blue'});
 
-    car.onError(getErrorHandler(false));
+    car.toError(getErrorHandler(false));
 
     car.save(function(err) {
       assert(null == err.error);
@@ -471,11 +471,11 @@ describe('Model#onError()', function() {
     var Car = model('Car')
       .attr('id')
       .attr('color')
-      .onError(getErrorHandler(true));
+      .toError(getErrorHandler(true));
 
     var car = new Car({color: 'red'});
 
-    car.onError(getErrorHandler(false));
+    car.toError(getErrorHandler(false));
 
     car.save(function(err) {
       assert(null == err.error);
