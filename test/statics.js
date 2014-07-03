@@ -94,7 +94,7 @@ describe('Model.toError()', function() {
   });
 
 
-  it('should be called on errors', function(done) {
+  it('should be called on errors (e.g. request timeout)', function(done) {
     Car.all(function(err, res) {
       assert(err.error instanceof Error);
       assert(-1 != err.error.message.indexOf('timeout'));
