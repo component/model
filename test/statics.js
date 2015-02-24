@@ -68,3 +68,59 @@ describe('Model.route(string)', function(){
     assert('/api/u/edit' == User.url('edit'));
   })
 })
+
+describe('Model.toError()', function() {
+  var Car = model('Car')
+    .attr('id')
+    .attr('color')
+    .toError(function(err, res) {
+      return {error: err, response: res};
+    });
+
+  var _request_get = Car.request.get;
+
+  before( function(done) {
+    Car.request.get = function(url, data, fn) {
+      var req = _request_get(url, data, fn);
+      req.timeout(1);
+      return req;
+    };
+    done();
+  });
+
+  after( function(done) {
+    Car.request.get = _request_get;
+    done();
+  });
+
+
+  it('should be called on errors (e.g. request timeout)', function(done) {
+    Car.all(function(err, res) {
+      assert(err.error instanceof Error);
+      assert(-1 != err.error.message.indexOf('timeout'));
+      done();
+    });
+  });
+
+  it('should be inherited by model instances', function(done) {
+    var car = new Car({color: 'silver'});
+
+    car.save(function(err) {
+      assert(500 == err.response.status);
+      done();
+    });
+  });
+
+  it('should use the default error handler if not called', function(done) {
+    var Car = model('Car')
+      .attr('id')
+      .attr('color');
+
+    Car.all(function(err) {
+      assert(err instanceof Error);
+      assert(-1 != err.message.indexOf('timeout'));
+
+      done();
+    });
+  });
+});
