@@ -1,4 +1,16 @@
 
+0.1.6 / 2014-11-13
+==================
+
+ * update component/each to 0.2.5
+ * update component/emitter to 1.1.3
+ * update visionmedia/superagent to 0.21.0
+
+0.1.5 / 2014-07-07 
+==================
+
+ * fix node requires
+
 0.1.4 / 2014-06-20 
 ==================
 

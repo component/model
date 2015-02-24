@@ -2,7 +2,7 @@
   "name": "model",
   "repo": "component/model",
   "description": "Elegant data models",
-  "version": "0.1.4",
+  "version": "0.1.6",
   "keywords": [
     "collection",
     "model",
@@ -11,10 +11,10 @@
     "database"
   ],
   "dependencies": {
-    "component/each": "0.2.4",
-    "component/emitter": "1.1.2",
+    "component/each": "0.2.5",
+    "component/emitter": "1.1.3",
     "component/collection": "*",
-    "visionmedia/superagent": "0.18.0"
+    "visionmedia/superagent": "0.21.0"
   },
   "development": {
     "component/reactive": "0.13.0",
