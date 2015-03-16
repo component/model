@@ -1,4 +1,10 @@
 
+0.2.0 / 2015-03-16
+==================
+
+ * update component/emitter to 1.2.0
+ * update visionmedia/superagent to 1.1.0
+
 0.1.6 / 2014-11-13
 ==================
 
@@ -6,17 +12,17 @@
  * update component/emitter to 1.1.3
  * update visionmedia/superagent to 0.21.0
 
-0.1.5 / 2014-07-07 
+0.1.5 / 2014-07-07
 ==================
 
  * fix node requires
 
-0.1.4 / 2014-06-20 
+0.1.4 / 2014-06-20
 ==================
 
  * fix component/emitter name in package.json
 
-0.1.3 / 2014-06-20 
+0.1.3 / 2014-06-20
 ==================
 
  * fix component/each name in package.json
@@ -24,10 +30,10 @@
 
 0.1.2 / 2014-01-20
 ==================
- 
+
  * fix: node support
 
-0.1.1 / 2013-09-08 
+0.1.1 / 2013-09-08
 ==================
 
  * add: request object for configuration
