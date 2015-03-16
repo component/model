@@ -1,4 +1,10 @@
 
+0.2.1 / 2015-03-16
+==================
+
+ * update visionmedia/superagent to v1.1.0
+ * use `(err, res)` callback style for superagent requests
+
 0.2.0 / 2015-03-16
 ==================
 

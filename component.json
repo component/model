@@ -2,7 +2,7 @@
   "name": "model",
   "repo": "component/model",
   "description": "Elegant data models",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "keywords": [
     "collection",
     "model",
