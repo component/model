@@ -4,10 +4,10 @@
   "repository": "git://github.com/component/model.git",
   "main": "lib/index.js",
   "dependencies": {
-    "component-emitter": "~1.1.3",
+    "component-emitter": "~1.2.0",
     "collection": "git://github.com/component/collection#0.0.2",
     "component-each": "~0.2.5",
-    "superagent": "~0.21.0"
+    "superagent": "~1.1.0"
   },
   "devDependencies": {
     "express": "3.0.0"
