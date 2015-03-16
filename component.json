@@ -14,7 +14,7 @@
     "component/each": "0.2.5",
     "component/emitter": "1.2.0",
     "component/collection": "*",
-    "visionmedia/superagent": "1.1.0"
+    "visionmedia/superagent": "v1.1.0"
   },
   "development": {
     "component/reactive": "0.13.0",
