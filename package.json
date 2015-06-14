@@ -5,9 +5,16 @@
   "main": "lib/index.js",
   "dependencies": {
     "component-emitter": "~1.1.3",
-    "collection": "git://github.com/component/collection#0.0.2",
+    "component-collection": "~0.0.2",
     "component-each": "~0.2.5",
     "superagent": "~0.21.0"
+  },
+  "browser": {
+    "map": {
+      "emitter": "component-emitter",
+      "collection": "component-collection",
+      "each": "component-each"
+    }
   },
   "devDependencies": {
     "express": "3.0.0"
