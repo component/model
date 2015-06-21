@@ -10,11 +10,9 @@
     "superagent": "~0.21.0"
   },
   "browser": {
-    "map": {
-      "emitter": "component-emitter",
-      "collection": "component-collection",
-      "each": "component-each"
-    }
+    "emitter": "component-emitter",
+    "collection": "component-collection",
+    "each": "component-each"
   },
   "devDependencies": {
     "express": "3.0.0"
