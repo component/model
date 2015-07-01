@@ -402,6 +402,11 @@ describe('Model#toJSON()', function(){
     assert('Tobi' == obj.name);
     assert(2 == obj.age);
   })
+  it('should copy', function(){
+    var user = new User({ name: 'Tobi', age: 2 });
+    user.toJSON().name = 'Loki';
+    assert('Tobi' == user.toJSON().name);
+  })
 })
 
 describe('Model#isValid()', function(){
